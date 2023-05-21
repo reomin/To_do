@@ -1,11 +1,11 @@
 import React from "react";
+import Home from "./Home"
 
 function TodoForm(){
 
     return(
         <form>
         <h2>タスクの追加</h2>
-
         <div className="form-group">
             <input 
                 type="text" 
