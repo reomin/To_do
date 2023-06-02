@@ -103,7 +103,9 @@
             <div id="example"></div>
         </div>
     </div>
-    <script src="{{ mix('js/app.js') }}"></script>
+    <div id="login"></div>
+    </div>
+
 </body>
 
 </html>
