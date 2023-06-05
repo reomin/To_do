@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TodoForm from "./Todoform";
-import TodoList from "./TodoList";
+import TodoForm from "./pages/function/Todoform";
+import TodoList from "./pages/function/TodoList";
 import { BrowserRouter, Route } from 'react-router-dom';
 
-function App() {
-    console.log("こんにちは");
-
+function Todo() {
     //表示させたいTodo listを格納する
     const todo_list = [
 		1,
@@ -19,7 +17,6 @@ function App() {
             <div className='row justify-content-center'>
                 <div className='col-md-8'>
                     
-                <div className="card-header">Hello world</div>
                     <div className="card-body">
                         { /* form */ }
                         <TodoForm />
@@ -31,4 +28,8 @@ function App() {
     );
 }
 
-export default App;
+export default Todo;
+
+if (document.getElementById('todo')) {
+    ReactDOM.render(<Todo />, document.getElementById('todo'));
+}

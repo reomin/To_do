@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TodoForm from "./Todoform";
-import TodoList from "./TodoList";
+import TodoForm from "../function/Todoform";
+import TodoList from "../function/TodoList";
 import { BrowserRouter, Route } from 'react-router-dom';
 
 function Login() {
-    console.log("こんにちは");
     return (
         <div>
         <body>
