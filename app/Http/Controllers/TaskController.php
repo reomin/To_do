@@ -2,79 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use App\Task;
 use Illuminate\Http\Request;
-use App\Http\Requests\TaskRequest;
+use App\Task;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
 {
     /**
-     * Remove the specified resource from storage.
+     * Show the application dashboard.
      *
-     * @param  \App\Task  $task
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    //  タスク一覧を入手
-    //これはテストです
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Task  $task
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function index()
+    //画面にTodolistを表示する
+    public function get()
     {
-
-        return Task::orderByDesC("id")->get();
+        Log::info("👿");
+        $tasks = DB::table('tasks')->get();
+        return $tasks;
     }
 
 
-    //新規登録
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Task  $task
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function store(Request $request)
+    //userが入力したformの内容をtaskに入力する
+    public function save(Request $request)
     {
-
-        $task = Task::create($request->all());
-
-        return $task
-            ? response()->json($task, 201)
-            : response()->json([], 500);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param   TaskRequest $request
-     * @param  \App\Task  $task
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function update(Request $request, Task $task)
-    {
-
-        $task->title = $request->title;
-
-        return $task->update()
-            ? response()->json($task)
-            : response()->json([], 500);
+        Log::info($request);
+        Log::info("👹👹👹👹👹👹👹👹👹👹");
+        $task = new Task;
+        Log::info($task);
+        $task->description = $request->task;
+        //後で変更する
+        $task->title = "こんにちは";
+        //userごとに後で変更する
+        $task->uid = "3";
+        $task->save();
+        return response()->json($task, 200);
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Task  $task
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function destroy(Task $task)
+    public function delete_todo()
     {
-
-        return $task->delete()
-            ? response()->json($task)
-            : response()->json([], 500);
+        return view('home');
     }
 }

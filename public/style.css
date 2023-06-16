@@ -1,7 +1,7 @@
 /* Design based on Blue Login Field of Kevin Sleger https://codepen.io/MurmeltierS/pen/macKb */
 
 body {
-  background: #44c4e7;
+  background: #44c4e7 url("https://images.unsplash.com/photo-1554321585-ef3194b190cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dmFuY291dmVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -13,7 +13,7 @@ body {
 body::before {
   z-index: -1;
   content: '';
-  /* position: fixed; */
+  position: fixed;
   top: 0;
   left: 0;
   background: #44c4e7;

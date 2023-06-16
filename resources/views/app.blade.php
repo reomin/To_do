@@ -10,9 +10,15 @@
 
 <body>
     <div class="container py-5">
-        <div id="app"></div>
+        <div id="index"></div>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
+
+    <div class="text-center">
+        <a class="navbar-brand" href="{{ url('/login') }}">
+            ログインはこちら
+        </a>
+    </div>
 </body>
 
 </html>
