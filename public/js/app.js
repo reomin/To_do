@@ -73018,7 +73018,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _pages_function_Todoform__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/function/Todoform */ "./resources/js/components/pages/function/Todoform.js");
 /* harmony import */ var _pages_function_TodoList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/function/TodoList */ "./resources/js/components/pages/function/TodoList.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
@@ -73026,7 +73035,33 @@ __webpack_require__.r(__webpack_exports__);
 
 function Todo() {
   //表示させたいTodo listを格納する
-  var todo_list = [1];
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    tasks = _useState2[0],
+    setTask = _useState2[1];
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    todo_list = _useState4[0],
+    setTodoList = _useState4[1];
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    axios.get('/api/task/get').then(function (response) {
+      setTask(response.data);
+    })["catch"](function (error) {
+      console.log(error);
+    });
+    //第二引数を空にすると、初回のみ呼び出される
+  }, []);
+
+  //tasksが所得された後に、todo_listにtasksの内容を格納する
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    if (tasks.length > 0) {
+      var updatedTodoList = tasks.map(function (task) {
+        return task.title;
+      });
+      setTodoList(updatedTodoList);
+    }
+  }, [tasks]);
+  console.log(todo_list, "hogehogehoge");
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -73103,12 +73138,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+//todo formの内容
 function TodoForm() {
   //データを送るために保存する
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
     _useState2 = _slicedToArray(_useState, 2),
     data = _useState2[0],
     setData = _useState2[1];
+
+  // useStateで情報を取ってくる
   var onChange = function onChange() {
     var task = document.forms.task.task.value;
     console.log(task);
@@ -73116,22 +73155,21 @@ function TodoForm() {
       task: task
     });
   };
+  // 追加ボタンを押したときに起きる    
   var onClick = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
-            console.log("こんにちは");
-            _context.next = 3;
+            _context.next = 2;
             return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/task', data).then(function (res) {
-              console.log("こんばんわ");
               setData('');
-              location.href = "/";
+              location.href = "/home";
             })["catch"](function (error) {
               console.log(error);
               alert("エラーが起きました");
             });
-          case 3:
+          case 2:
           case "end":
             return _context.stop();
         }

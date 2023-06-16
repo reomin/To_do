@@ -2,16 +2,37 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TodoForm from "./pages/function/Todoform";
 import TodoList from "./pages/function/TodoList";
-import { BrowserRouter, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import Axios from 'axios';
 
 function Todo() {
     //表示させたいTodo listを格納する
-    const todo_list = [
-		1,
-	];
+    const[tasks,setTask] =useState([]);
+    const [todo_list, setTodoList] = useState([]);
+    
+    useEffect(()=>{
+        axios.get('/api/task/get')
+        .then(response => {
+            setTask(response.data);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+        //第二引数を空にすると、初回のみ呼び出される
+     }, []);
 
-
-
+     //tasksが所得された後に、todo_listにtasksの内容を格納する
+     useEffect(() => {
+        if (tasks.length > 0) {
+          const updatedTodoList = tasks.map(task => task.title);
+          setTodoList(updatedTodoList);
+        }
+      }, [tasks]);
+    
+     console.log(todo_list,"hogehogehoge");
+    
+  
     return (
         <div className='container'>
             <div className='row justify-content-center'>
