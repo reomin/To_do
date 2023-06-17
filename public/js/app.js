@@ -73056,7 +73056,7 @@ function Todo() {
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     if (tasks.length > 0) {
       var updatedTodoList = tasks.map(function (task) {
-        return task.title;
+        return task.description;
       });
       setTodoList(updatedTodoList);
     }

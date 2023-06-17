@@ -25,7 +25,7 @@ function Todo() {
      //tasksが所得された後に、todo_listにtasksの内容を格納する
      useEffect(() => {
         if (tasks.length > 0) {
-          const updatedTodoList = tasks.map(task => task.title);
+          const updatedTodoList = tasks.map(task => task.description);
           setTodoList(updatedTodoList);
         }
       }, [tasks]);

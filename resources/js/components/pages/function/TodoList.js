@@ -9,6 +9,7 @@ function TodoList(props){
                 {
                     todo_list.map((todo, index) => {
                     return <li className="todo-item" key={index}>
+                        {/* チェックボタンが押されたら、消す */}
                         <input type="checkbox" />
                             <span>{ todo }</span>
                     </li>})

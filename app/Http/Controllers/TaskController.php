@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Task;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -15,10 +16,15 @@ class TaskController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
+
+    public function __construct()
+    {
+        $this->middleware('web');
+    }
+
     //画面にTodolistを表示する
     public function get()
     {
-        Log::info("👿");
         $tasks = DB::table('tasks')->get();
         return $tasks;
     }
@@ -27,8 +33,6 @@ class TaskController extends Controller
     //userが入力したformの内容をtaskに入力する
     public function save(Request $request)
     {
-        Log::info($request);
-        Log::info("👹👹👹👹👹👹👹👹👹👹");
         $task = new Task;
         Log::info($task);
         $task->description = $request->task;
