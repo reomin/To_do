@@ -31,3 +31,7 @@ Route::group(['middleware' => 'api'], function () {
 Route::group(['middleware' => 'api'], function () {
     Route::get('task/get', "TaskController@get");
 });
+
+Route::group(['middleware' => 'api'], function () {
+    Route::delete('task/delete/{id}', "TaskController@delete");
+});

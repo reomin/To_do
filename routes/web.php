@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// ルート定義
-
 Route::get('/', function () {
     return view('app');
 });

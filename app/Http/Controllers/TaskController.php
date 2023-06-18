@@ -16,12 +16,6 @@ class TaskController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-
-    public function __construct()
-    {
-        $this->middleware('web');
-    }
-
     //画面にTodolistを表示する
     public function get()
     {
@@ -45,8 +39,11 @@ class TaskController extends Controller
     }
 
 
-    public function delete_todo()
+    //todo listを消す
+    public function delete(Request $request)
     {
-        return view('home');
+        $id = $request->id;
+        $task = new Task;
+        $task->destroy($id);
     }
 }
