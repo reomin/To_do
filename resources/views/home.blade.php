@@ -80,6 +80,7 @@
         </main>
     </div>
     <div id="todo"></div>
+    {{ Auth::id() }}
 </body>
 
 </html>

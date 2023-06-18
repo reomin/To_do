@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+
+// ルート定義
+
 Route::get('/', function () {
     return view('app');
 });
@@ -28,8 +31,6 @@ Route::get('/welcome', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-    // Route::get('/home', function () {
-    //     return view('home');
-    // });
+Route::middleware(['web'])->group(function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+});
