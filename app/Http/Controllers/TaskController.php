@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Task;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -18,7 +19,6 @@ class TaskController extends Controller
     //画面にTodolistを表示する
     public function get()
     {
-        Log::info("👿");
         $tasks = DB::table('tasks')->get();
         return $tasks;
     }
@@ -27,8 +27,6 @@ class TaskController extends Controller
     //userが入力したformの内容をtaskに入力する
     public function save(Request $request)
     {
-        Log::info($request);
-        Log::info("👹👹👹👹👹👹👹👹👹👹");
         $task = new Task;
         Log::info($task);
         $task->description = $request->task;
@@ -41,8 +39,11 @@ class TaskController extends Controller
     }
 
 
-    public function delete_todo()
+    //todo listを消す
+    public function delete(Request $request)
     {
-        return view('home');
+        $id = $request->id;
+        $task = new Task;
+        $task->destroy($id);
     }
 }

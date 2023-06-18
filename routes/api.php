@@ -5,6 +5,7 @@ use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,4 +30,8 @@ Route::group(['middleware' => 'api'], function () {
 
 Route::group(['middleware' => 'api'], function () {
     Route::get('task/get', "TaskController@get");
+});
+
+Route::group(['middleware' => 'api'], function () {
+    Route::delete('task/delete/{id}', "TaskController@delete");
 });
