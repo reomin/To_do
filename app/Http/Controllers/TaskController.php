@@ -19,6 +19,9 @@ class TaskController extends Controller
     //画面にTodolistを表示する
     public function get()
     {
+        $user = Auth::user();
+        Log::info($user);
+        Log::info("🦆🦆🦆");
         $tasks = DB::table('tasks')->get();
         return $tasks;
     }
